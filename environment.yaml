@@ -1,0 +1,30 @@
+name: parse
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - numpy==2.0
+  - pandas>=2.2
+  - polars
+  - pyarrow
+  - scipy
+  - matplotlib
+  - natsort
+  - h5py
+  - pysam>=0.20.0
+  - scanpy>=1.8
+  - anndata
+  - leidenalg
+  - python-igraph
+  - indexed_gzip
+  - jinja2
+  - psutil
+  - python-calamine
+  - numba<=0.61.2
+  - libxcrypt
+  - libxml2
+  - unzip 
+  - pigz
+  - bioconda::samtools>=1.16      
+  - bioconda::star>=2.7
+  - gcc>=15
