@@ -23,6 +23,7 @@ RUN unzip ParseBiosciences-Pipeline.${PIPELINE_VERSION}.zip && \
     micromamba clean --all --yes
 
 ENV ENV_NAME=parse
+ENV PATH="/opt/conda/envs/parse/bin:${PATH}"
 ARG MAMBA_DOCKERFILE_ACTIVATE=1
 
 # This is an unhinged workaround to get the pipeline installed with the correct numpy version. The pipeline's setup.py and pyproject.toml specify numpy>=2.0, but this causes it to install numpy 2.4.4 and causes incompatibility issues.
