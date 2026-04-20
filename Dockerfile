@@ -9,8 +9,7 @@ LABEL author="Remi-Andre Olsen" \
       version="${IMAGE_VERSION}" \
       pipeline.version="${PIPELINE_VERSION}"
 
-
-
+# Ugly hack. We put most of the dependencies in the environment.yaml and let mamba manage them.
 COPY --chown=$MAMBA_USER:$MAMBA_USER ParseBiosciences-Pipeline.${PIPELINE_VERSION}.zip .
 COPY --chown=$MAMBA_USER:$MAMBA_USER environment.yaml .
 
@@ -36,6 +35,3 @@ RUN apt-get remove -y unzip && apt-get autoremove -y && apt-get clean && rm -rf 
 USER $MAMBA_USER
 
 RUN split-pipe --help
-
-
-ENTRYPOINT ["split-pipe"]
