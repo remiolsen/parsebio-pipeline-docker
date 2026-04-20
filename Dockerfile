@@ -19,20 +19,21 @@ USER $MAMBA_USER
 
 RUN unzip ParseBiosciences-Pipeline.${PIPELINE_VERSION}.zip && \
     rm ParseBiosciences-Pipeline.${PIPELINE_VERSION}.zip && \
-    micromamba create -n parse --file environment.yaml && \
+    micromamba create -n spipe --file environment.yaml && \
     micromamba clean --all --yes
 
-ENV ENV_NAME=parse
-ENV PATH="/opt/conda/envs/parse/bin:${PATH}"
+ENV ENV_NAME=spipe
+ENV PATH="/opt/conda/envs/spipe/bin:${PATH}"
 ARG MAMBA_DOCKERFILE_ACTIVATE=1
 
 # This is an unhinged workaround to get the pipeline installed with the correct numpy version. The pipeline's setup.py and pyproject.toml specify numpy>=2.0, but this causes it to install numpy 2.4.4 and causes incompatibility issues.
-RUN cd ParseBiosciences-Pipeline.${PIPELINE_VERSION} && eval "$(micromamba shell hook --shell bash)" && micromamba activate parse && \
+RUN cd ParseBiosciences-Pipeline.${PIPELINE_VERSION} && eval "$(micromamba shell hook --shell bash)" && micromamba activate spipe && \
     sed -i 's/numpy>=2.0/numpy==2.0/' setup.py && sed -i 's/numpy>=2.0/numpy==2.0/' pyproject.toml && pip install -v --no-cache-dir ./
 
 
 USER root
 RUN apt-get remove -y unzip && apt-get autoremove -y && apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN ln -s /bin/micromamba /usr/local/bin/conda
 USER $MAMBA_USER
 
 RUN split-pipe --help

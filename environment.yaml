@@ -1,4 +1,4 @@
-name: parse
+name: spipe
 channels:
   - conda-forge
   - bioconda
