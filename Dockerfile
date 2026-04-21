@@ -1,7 +1,7 @@
 FROM continuumio/miniconda3:latest
 
 ARG PIPELINE_VERSION=1.7.1
-ARG IMAGE_VERSION=0.0.1
+ARG IMAGE_VERSION=0.1.0
 
 LABEL author="Remi-Andre Olsen" \
       description="Parsebio pipeline Docker image" \
