@@ -25,3 +25,5 @@ docker build \
   -t remiolsen/parsebio-pipeline:1.7.1-0.0.1 \
   .
 ```
+
+Step 3. To build an apptainer image locally - see: https://github.com/kaczmarj/apptainer-in-docker
