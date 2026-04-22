@@ -22,6 +22,6 @@ Step 2. Run:
 docker build \
   --build-arg PIPELINE_VERSION=1.7.1 \
   --build-arg IMAGE_VERSION=0.0.1 \
-  -t parsebio-pipeline:1.7.1-0.0.1 \
+  -t remiolsen/parsebio-pipeline:1.7.1-0.0.1 \
   .
 ```

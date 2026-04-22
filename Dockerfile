@@ -1,7 +1,7 @@
 FROM continuumio/miniconda3:latest
 
 ARG PIPELINE_VERSION=1.7.1
-ARG IMAGE_VERSION=0.1.0
+ARG IMAGE_VERSION=0.2.0
 
 LABEL author="Remi-Andre Olsen" \
       description="Parsebio pipeline Docker image" \
@@ -24,8 +24,9 @@ ENV ENV_NAME=spipe
 ENV PATH="/opt/conda/envs/spipe/bin:${PATH}"
 
 # This is an unhinged workaround to get the pipeline installed with the correct numpy version. The pipeline's setup.py and pyproject.toml specify numpy>=2.0, but this causes it to install numpy 2.4.4 and causes incompatibility issues.
-RUN cd ParseBiosciences-Pipeline.${PIPELINE_VERSION} && \
-    sed -i 's/numpy>=2.0/numpy==2.0/' setup.py && sed -i 's/numpy>=2.0/numpy==2.0/' pyproject.toml && \
+RUN cd ParseBiosciences-Pipeline.${PIPELINE_VERSION} && sed -i 's/numpy>=2.0/numpy==2.0/' setup.py && sed -i 's/numpy>=2.0/numpy==2.0/' pyproject.toml && \
     conda run -n spipe pip install -v --no-cache-dir ./
-
-RUN split-pipe --help
+# Install TCR and BCR dependencies and databases.
+RUN cd ParseBiosciences-Pipeline.${PIPELINE_VERSION} && bash ./install_immune_dbs.sh -I -y && \
+    conda run -n spipe pip install -v --no-cache-dir ./
+RUN cd ParseBiosciences-Pipeline.${PIPELINE_VERSION} && split-pipe --help && bash ./install_immune_dbs.sh -c
