@@ -26,4 +26,4 @@ docker build \
   .
 ```
 
-Step 3. To build an apptainer image locally - see: https://github.com/kaczmarj/apptainer-in-docker
+Step 3. To build an apptainer image locally, see: https://github.com/kaczmarj/apptainer-in-docker

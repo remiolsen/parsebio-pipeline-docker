@@ -22,7 +22,6 @@ dependencies:
   - python-calamine
   - numba<=0.61.2
   - libxcrypt
-  - libxml2
   - unzip 
   - pigz
   - bioconda::samtools>=1.16      

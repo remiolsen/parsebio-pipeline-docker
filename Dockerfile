@@ -1,7 +1,7 @@
 FROM continuumio/miniconda3:26.1.1
 
 ARG PIPELINE_VERSION=1.7.1
-ARG IMAGE_VERSION=0.2.1
+ARG IMAGE_VERSION=0.2.2
 
 LABEL author="Remi-Andre Olsen" \
       description="Parsebio pipeline Docker image" \
@@ -13,7 +13,7 @@ LABEL author="Remi-Andre Olsen" \
 COPY ParseBiosciences-Pipeline.${PIPELINE_VERSION}.zip .
 COPY environment.yaml .
 
-RUN apt-get update && apt-get install -y unzip && \
+RUN apt-get update && apt-get install -y unzip libxml2 && \
     unzip ParseBiosciences-Pipeline.${PIPELINE_VERSION}.zip && \
     rm ParseBiosciences-Pipeline.${PIPELINE_VERSION}.zip && \
     conda env create -n spipe --file environment.yaml && \
